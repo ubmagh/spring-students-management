@@ -66,8 +66,32 @@ Application JEE en spring pour gérer les étudiant.
 <img src="./assets/8.png" width="350">
 
 
+<br/>
+
+> ## 7- Créer le controlleur web + les templates (views)
+
+* Le controlleur `web/MainController` 
+
+<img src="./assets/9.png" width="350">
+
+* Le template de base `resources/templates/layouts/BaseLayout.html` : 
+
+<img src="./assets/10.png" width="350">
+
+* Le template (view) de la page principale (index) `resources/templates/pages/home.html` :
+
+<img src="./assets/11.png" width="350">
+
+* j'ai aussi ajouté des fichiers ressources dans le chemin des ressources statiques :
+
+<img src="./assets/12.png" width="350">
+
 
 <br/>
 
 
 
+<br/>
+<br/>
+
+## > Fin .
