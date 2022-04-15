@@ -136,6 +136,16 @@ Application JEE en spring pour gérer les étudiant.
 <img src="./assets/20.png" width="400">
 
 
+<br/>
+
+> ## 11- Ajouter le package spring-boot-devtools  :
+
+* pour eviter de redémarrer à chaque modification toute l'app.
+
+<img src="./assets/21.png" width="350">
+
+
+
 
 <br/>
 <br/>
