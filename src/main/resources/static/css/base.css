@@ -1,5 +1,6 @@
 body {
     background:url(/img/bg.jpg) #444;
+    background-repeat: no-repeat;
     background-size:cover;
 }
 

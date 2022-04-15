@@ -89,6 +89,22 @@ Application JEE en spring pour gérer les étudiant.
 
 <br/>
 
+> ## 8- Configuration du package Spring Security
+
+* L'application necéssite une configuration de sécurité, pour pouvoir accéder à la page principale index, pour cela j'ai créé la class `security/SecurityConfiguration`
+
+<img src="./assets/13.png" width="350">
+
+* J'ai découvert que l'application manque les dépendances de thymeleaf, je les ai ajoutés : 
+
+<img src="./assets/14.png" width="350">
+
+* Après avoir lancé l'application, voici la page principale sur le navigateur :
+
+<img src="./assets/15.png" width="350">
+
+
+
 
 
 <br/>
