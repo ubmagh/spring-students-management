@@ -101,13 +101,23 @@ Application JEE en spring pour gérer les étudiant.
 
 * Après avoir lancé l'application, voici la page principale sur le navigateur :
 
-<img src="./assets/15.png" width="350">
+<img src="./assets/15.png" width="550">
 
 
+<br/>
 
+> ## 9- Ajouter des données à la BD :
+
+* Pour ajouter des données fictives à la BD, j'ai créé la fonction BEAN suivante dans le programme principal de l'app : 
+
+<img src="./assets/16.png" width="550">
+
+* voici le contenu de la table `etudiant` dans la BD
+
+<img src="./assets/17.jpg" width="550">
 
 
 <br/>
 <br/>
 
-## > Fin .
+> ## Fin .
