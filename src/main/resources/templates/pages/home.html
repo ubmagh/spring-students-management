@@ -12,12 +12,20 @@
 </head>
 <body>
     <div layout:fragment="content" >
-
+        <h1 class="text-center h1 mt-3 display-1 fw-bolder text-white"> Gestion des étudiants ! </h1>
+        <div class="my-5 card bg-dark">
+            <div class="card-body mySearchField">
+                <form class="form-inline w-100" method="get" th:action="@{etudiants}">
+                    <div class="form-group text-center px-2">
+                        <div class="input-group w-100">
+                            <input class="form-control search-field text-light text-center" placeholder="Chercher un étudiant .." type="search" name="keyword" id="search-field">
+                            <button class="btn" type="submit" > <i class="fa-solid fa-magnifying-glass text-light"></i> </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
-
-    <div layout:fragment="script">
-
-    </div>
 </body>
 </html>

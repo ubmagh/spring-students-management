@@ -140,10 +140,33 @@ Application JEE en spring pour gérer les étudiant.
 
 > ## 11- Ajouter le package spring-boot-devtools  :
 
-* pour eviter de redémarrer à chaque modification toute l'app.
+* pour eviter de redémarrer à chaque modification l'application.
 
 <img src="./assets/21.png" width="350">
 
+
+
+
+<br/>
+
+> ## 12- La page d'acceuil et la page contennant la liste des étudiants
+
+* la page d'acceuil contient une zone de text pour rechercher un étudiant, la recherche est redirigée vers la liste des étudiants.
+
+<img src="./assets/22.png" width="600">
+
+* J'ai créé le controlleur `web/EtudiantController` qui va s'occuper de toutes les pages en relation avec l'entité `Etudiant`, toutes ses routes vont etre préfixées par `/etudiants`.
+* J'ai créé dedans une fonction qui va retourner le template de la liste des étudiants paginée
+
+<img src="./assets/23.png" width="350">
+
+* Ensuite, j'ai créé le template (view) `resources/templates/pages/etudiants/list.html` :
+
+<img src="./assets/24.png" width="350">
+
+* voici le rendu de la liste des étudiants :
+
+<img src="./assets/25.png" width="600">
 
 
 

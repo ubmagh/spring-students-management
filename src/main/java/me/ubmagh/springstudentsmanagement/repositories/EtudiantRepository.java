@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EtudiantRepository extends JpaRepository<Etudiant, String> {
-    Page<Etudiant> findByNom(String keyword, Pageable pageable);
+    Page<Etudiant> findByNomContainsOrPrenomContains(String nomKey, String prenomKey, Pageable pageable);
 
 }

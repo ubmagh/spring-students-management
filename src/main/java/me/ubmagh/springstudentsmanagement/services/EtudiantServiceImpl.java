@@ -23,8 +23,8 @@ public class EtudiantServiceImpl implements IEtudiantService {
     }
 
     @Override
-    public Page<Etudiant> findByNom(String keyword, Pageable pageable) {
-        return etudiantRepository.findByNom( keyword, pageable);
+    public Page<Etudiant> findByNomOrPrenom(String keyword, Pageable pageable) {
+        return etudiantRepository.findByNomContainsOrPrenomContains( keyword, keyword, pageable);
     }
 
     @Override

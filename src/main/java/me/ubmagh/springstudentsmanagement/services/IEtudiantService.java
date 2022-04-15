@@ -8,7 +8,7 @@ public interface IEtudiantService {
 
 
     public Etudiant createEtudiant(Etudiant etudiant);
-    public Page<Etudiant> findByNom(String keyword, Pageable pageable);
+    public Page<Etudiant> findByNomOrPrenom(String keyword, Pageable pageable);
     public void deleteById( String id);
 
 }
