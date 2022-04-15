@@ -57,7 +57,17 @@ Application JEE en spring pour gérer les étudiant.
 
 <img src="./assets/7.png" width="350">
 
+<br/>
 
+> ## 6- Ajouter Bootstrap & JQuery comme dépendences
+
+* Ajouter ces dépendences dans le fichier `pom.xml` 
+
+<img src="./assets/8.png" width="350">
+
+
+
+<br/>
 
 
 
