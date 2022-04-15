@@ -2,6 +2,10 @@
 
 Application JEE en spring pour gérer les étudiant.
 
+<div style="text-align: center;">
+<img src="./assets/ennoncé.png" width="250">
+</div>
+
 # Réalisation :
 
 <br/>
@@ -29,5 +33,16 @@ Application JEE en spring pour gérer les étudiant.
 <img src="./assets/3.png" width="300">
 
 <img src="./assets/4.png" width="300">
+
+
+<br/>
+
+> ## 4- Créer le repository de l'entité etudiant :
+
+* Création du repository `repositories/EtudiantRepository`, avec une méthode qui sera utilisée lors de la recherche par nom.
+
+<img src="./assets/5.png" width="300">
+
+
 
 
