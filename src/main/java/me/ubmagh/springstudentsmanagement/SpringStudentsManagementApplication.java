@@ -1,5 +1,6 @@
 package me.ubmagh.springstudentsmanagement;
 
+import com.github.javafaker.Faker;
 import me.ubmagh.springstudentsmanagement.entities.Etudiant;
 import me.ubmagh.springstudentsmanagement.entities.GenresEnum;
 import me.ubmagh.springstudentsmanagement.helpers.HelperFunctions;
@@ -22,8 +23,19 @@ public class SpringStudentsManagementApplication {
         SpringApplication.run(SpringStudentsManagementApplication.class, args);
     }
 
-    @Bean
-    CommandLineRunner runner (){
+    // @Bean
+    CommandLineRunner data_with_faker (){
+        Faker faker = new Faker();
+        return args -> {
+            int nbr_etud = 77;
+            while ( nbr_etud-->0 )
+                etudiantService.createEtudiant(
+                        new Etudiant( null, faker.name().lastName(), faker.name().firstName(), faker.internet().emailAddress(), faker.date().birthday( 14, 20), faker.options().option(GenresEnum.class), faker.bool().bool() )
+                );
+        };
+    }
+
+    CommandLineRunner basic_data (){
         return args -> {
             Etudiant et1 = new Etudiant( null, "MAGHDAOUI", "Ayoub", "ayoub@ayoub.me", HelperFunctions.parseDate("2000-06-01"), GenresEnum.MASCULIN, false),
                     et2 = new Etudiant( null, "ALLAT", "Mouad", "mouad@mouad.me", HelperFunctions.parseDate("2000-01-01"), GenresEnum.MASCULIN, true),

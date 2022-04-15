@@ -117,6 +117,26 @@ Application JEE en spring pour gérer les étudiant.
 <img src="./assets/17.jpg" width="550">
 
 
+
+
+<br/>
+
+> ## 10- Ajouter le package faker  :
+
+* Pour générer des données nombreuses et adéquates, j'ai installé faker :
+
+<img src="./assets/18.png" width="400">
+
+* et j'ai mis à jour la fonction BEAN dans le programme pricipal : 
+
+<img src="./assets/19.png" width="550">
+
+* voici le contenu de la table `etudiant` dans la BD
+
+<img src="./assets/20.png" width="400">
+
+
+
 <br/>
 <br/>
 
