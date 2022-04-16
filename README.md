@@ -231,6 +231,25 @@ Application JEE en spring pour gérer les étudiant.
 
 
 
+<br/>
+
+> ## 15- Supprimer les étudiants
+
+* créer la fonction `delete` sur le controlleur `web/EtudiantController` qui va supprimer l'étudiant par son id :
+
+<img src="./assets/38.png" width="400">
+
+* Pour résoudre les contraintes de sécurité pour éffectuer la suppression, j'ai désactivé la vérification CSRF :
+
+<img src="./assets/39.png" width="400">
+
+* Ensuite j'ai ajouté sur la liste des étudiants le bouton de suppression et une boite de dialog de confirmation, ainsi le code javascript(JQuery) pour envoyer la requette ajax de suppression :
+
+<img src="./assets/40.png" width="450">
+
+<img src="./assets/41.png" width="450">
+
+
 
 <br/>
 <br/>

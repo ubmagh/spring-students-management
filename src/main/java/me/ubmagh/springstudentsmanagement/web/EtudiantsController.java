@@ -1,5 +1,6 @@
 package me.ubmagh.springstudentsmanagement.web;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import me.ubmagh.springstudentsmanagement.entities.Etudiant;
 import me.ubmagh.springstudentsmanagement.services.EtudiantServiceImpl;
@@ -34,6 +35,8 @@ public class EtudiantsController {
         model.addAttribute("tab", "etudiants");
         model.addAttribute("added", added);
         model.addAttribute("updated", updated);
+        if( page<0 )
+            page = 0;
 
         int[] pages ;
         if( etudiantsList.getTotalPages()>7 ) {
@@ -61,6 +64,8 @@ public class EtudiantsController {
         model.addAttribute("size", size);
         model.addAttribute("keyword", keyword);
         model.addAttribute("maxPages", etudiantsList.getTotalPages());
+        if( etudiantsList.getContent().size()==0 && page>1)
+            return this.liste( model, page-1, size, keyword, added, updated );
         return "pages/etudiants/list";
     }
 
@@ -112,6 +117,15 @@ public class EtudiantsController {
             return "pages/etudiants/edit_form";
         etudiantService.save(etudiant);
         return "redirect:/etudiants?updated=true&page="+page+"&size="+size+"&keyword="+keyword;
+    }
+
+
+    @DeleteMapping("/etudiants/{id}")
+    @ResponseBody
+    public void delete(@PathVariable String id){
+        Etudiant et = etudiantService.findById( id);
+        if ( et==null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Etudiant introuvable");
+        etudiantService.deleteById(id);
     }
 
 

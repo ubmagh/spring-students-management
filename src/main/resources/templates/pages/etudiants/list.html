@@ -19,7 +19,7 @@
                 <div class="form-group text-center px-2">
                     <div class="input-group w-100">
                         <input class="form-control search-field text-light text-center"
-                               placeholder="Chercher un étudiant .." th:value="${keyword}" type="search" name="search"
+                               placeholder="Chercher un étudiant .." th:value="${keyword}" type="search" name="keyword"
                                id="search-field">
                         <button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass text-light"></i>
                         </button>
@@ -67,10 +67,13 @@
                         <a th:href="@{/etudiants/{id}(id=${e.getId()}, page=${currentPage}, size=${size}, keyword=${keyword} )}" class="btn btn-outline-success">
                             <i class="fa-regular fa-pen-to-square"></i>
                         </a>
+                        <button type="button" class="btn btn-outline-danger deleteBtn"  th:data-id="${e.getId()}" th:data-name="${e.getPrenom()+' '+e.getNom()}">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
                     </td>
                 </tr>
                 <tr th:if="${ #lists.isEmpty(etudiants)}">
-                    <td colspan="6" class="bg-light">
+                    <td colspan="8" class="bg-warning">
                         <i class="fa-solid fa-exclamation"></i> Aucun étudiant n'a été trouvé !
                     </td>
                 </tr>
@@ -123,8 +126,28 @@
                         <option value="25" th:selected="${size==25}">25</option>
                         <option value="50" th:selected="${size==50}">50</option>
                         <option value="100" th:selected="${size==100}">100</option>
+                        <option value="100" th:selected="${size==200}">200</option>
                     </select>
                     <small class="text-muted ms-auto">étudiants par page</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deletingConfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Supprimer un etudiant</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <form action="" id="delForm" class="mx-auto">
+                        <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal"> <i class="fa-solid fa-xmark"></i> Annuler</button>
+                        <button type="submit" class="btn btn-outline-danger"> <i class="fa-solid fa-check"></i> Supprimer</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -134,11 +157,38 @@
 
 <div layout:fragment="script">
     <script>
+        var idDel="";
         $(function () {
             $('#sizeSelect').change(e => {
                 const location = window.location;
                 window.location = location.protocol + '//' + location.host + "/" + $('#sizeSelect').attr('data') + "&size=" + $(e.currentTarget).val()
             })
+            var myModal = new bootstrap.Modal(document.getElementById('deletingConfirmation'), {
+                keyboard: false
+            })
+
+            $('.deleteBtn').click( e=>{
+                const id = $(e.currentTarget).data('id')
+                idDel = id;
+                const name = $(e.currentTarget).data('name')
+                $("#modal-body").html('Etes-vous sure de supprimer l\'étudiant : '+name+'  ?');
+                myModal.show()
+            })
+
+            $("#delForm").submit( e=>{
+                e.preventDefault();
+               $.ajax({
+                   url :"/etudiants/"+idDel,
+                   method: "DELETE"
+               }).done(()=>{
+                   alert("Bien supprimé !");
+                   window.location.reload();
+               }).fail(e=>{
+                   alert(" Une erreur est servenue, l'étudiant n'est pas supprimé !");
+                   console.error(e)
+               });
+               myModal.hide();
+            });
         })
     </script>
 </div>
