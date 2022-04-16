@@ -2,6 +2,7 @@
 <html lang="fr"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="layouts/BaseLayout">
 <head>
     <meta charset="UTF-8">
@@ -47,7 +48,7 @@
                     <th> Date de naissance</th>
                     <th> Genre</th>
                     <th> En règle</th>
-                    <th> <strong>Actions</strong> </th>
+                    <th sec:authorize="hasAuthority('ADMIN')" > <strong>Actions</strong> </th>
                 </thead>
                 <tbody th:with="count=${size}*${currentPage}+1">
                 <tr th:each="e, stat:${etudiants}">
@@ -63,7 +64,7 @@
                         <span style="color: deepskyblue;" th:if="${e.getGenre().ordinal()==0}"> Masculin </span>
                     </td>
                     <td th:text="${e.isEnRegle()?'✔':'❌'}"></td>
-                    <td>
+                    <td sec:authorize="hasAuthority('ADMIN')">
                         <a th:href="@{/etudiants/{id}(id=${e.getId()}, page=${currentPage}, size=${size}, keyword=${keyword} )}" class="btn btn-outline-success">
                             <i class="fa-regular fa-pen-to-square"></i>
                         </a>
@@ -73,7 +74,10 @@
                     </td>
                 </tr>
                 <tr th:if="${ #lists.isEmpty(etudiants)}">
-                    <td colspan="8" class="bg-warning">
+                    <td sec:authorize="hasAuthority('ADMIN')" colspan="8" class="bg-warning text-dark">
+                        <i class="fa-solid fa-exclamation"></i> Aucun étudiant n'a été trouvé !
+                    </td>
+                    <td sec:authorize="!hasAuthority('ADMIN')" colspan="7" class="bg-warning text-dark">
                         <i class="fa-solid fa-exclamation"></i> Aucun étudiant n'a été trouvé !
                     </td>
                 </tr>
@@ -133,12 +137,12 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="deletingConfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" sec:authorize="hasAuthority('ADMIN')" id="deletingConfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark text-white">
+            <div class="modal-content bg-dark text-white border border-light">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Supprimer un etudiant</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="modal-body">
 

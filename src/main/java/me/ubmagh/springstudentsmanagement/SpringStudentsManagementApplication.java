@@ -4,12 +4,17 @@ import com.github.javafaker.Faker;
 import me.ubmagh.springstudentsmanagement.entities.Etudiant;
 import me.ubmagh.springstudentsmanagement.entities.GenresEnum;
 import me.ubmagh.springstudentsmanagement.helpers.HelperFunctions;
+import me.ubmagh.springstudentsmanagement.security.entities.AppUser;
+import me.ubmagh.springstudentsmanagement.security.services.ISecurityService;
+import me.ubmagh.springstudentsmanagement.security.services.SecurityServiceImpl;
 import me.ubmagh.springstudentsmanagement.services.EtudiantServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.stream.Stream;
 
@@ -19,8 +24,30 @@ public class SpringStudentsManagementApplication {
     @Autowired
     EtudiantServiceImpl etudiantService;
 
+
     public static void main(String[] args) {
         SpringApplication.run(SpringStudentsManagementApplication.class, args);
+    }
+
+    @Bean
+    PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
+    // @Bean
+    public static CommandLineRunner create_users(SecurityServiceImpl securityService){
+        return args -> {
+            securityService.saveNewUser( "admin", "admin", "admin");
+            securityService.saveNewUser( "user", "user", "user");
+
+            securityService.saveNewRole("ADMIN", "This is the admin role !");
+            securityService.saveNewRole("USER", "This is the user role !");
+
+            securityService.addRoleToUser( "admin", "ADMIN");
+            securityService.addRoleToUser( "admin", "USER");
+            securityService.addRoleToUser( "user", "USER");
+
+        };
     }
 
     // @Bean

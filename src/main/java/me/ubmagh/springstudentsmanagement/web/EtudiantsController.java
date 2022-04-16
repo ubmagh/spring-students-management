@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +25,7 @@ public class EtudiantsController {
     @Autowired
     private EtudiantServiceImpl etudiantService;
 
+    @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/etudiants")
     public String liste( Model model, @RequestParam(value = "page", defaultValue = "0") int page,
                          @RequestParam(value = "size", defaultValue = "10") int size,
@@ -69,6 +72,7 @@ public class EtudiantsController {
         return "pages/etudiants/list";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/etudiants/new")
     public String add( Model model){
         model.addAttribute("tab", "etudiants");
@@ -76,6 +80,7 @@ public class EtudiantsController {
         return "pages/etudiants/create_form";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/etudiants/new")
     public String save(Model model, @Valid Etudiant etudiant, BindingResult bindingResult){
         model.addAttribute("tab", "etudiants");
@@ -86,7 +91,7 @@ public class EtudiantsController {
         return "redirect:/etudiants?added=true";
     }
 
-
+        @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/etudiants/{id}")
     public String edit(Model model, @PathVariable String id,
                        @RequestParam(value = "page", defaultValue = "0") int page,
@@ -102,7 +107,7 @@ public class EtudiantsController {
         return "pages/etudiants/edit_form";
     }
 
-
+        @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/etudiants/put")
     public String put(Model model, @Valid Etudiant etudiant, BindingResult bindingResult,
                       @RequestParam(value = "page", defaultValue = "0") int page,
@@ -119,7 +124,7 @@ public class EtudiantsController {
         return "redirect:/etudiants?updated=true&page="+page+"&size="+size+"&keyword="+keyword;
     }
 
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/etudiants/{id}")
     @ResponseBody
     public void delete(@PathVariable String id){

@@ -6,7 +6,7 @@ Application JEE en spring pour gérer les étudiant.
 <img src="./assets/ennoncé.png" width="450">
 </div>
 
-# Réalisation :
+# Rapport :
 
 <br/>
 
@@ -250,8 +250,72 @@ Application JEE en spring pour gérer les étudiant.
 <img src="./assets/41.png" width="450">
 
 
+<br/>
+
+> ## 16- Sécuriser l'accès à l'application avec un système d'authentification basé sur Spring security en utilisant la stratégie UseDetails Service
+
+
+* Créer les deux entités : `security/entities/AppUser` & `security/entities/AppRole`
+
+<img src="./assets/42.png" width="450">
+
+<img src="./assets/43.png" width="450">
+
+* Créer les deux répositories pour les deux entités précédentes dans le package `security/repositories` :
+
+<img src="./assets/44.png" width="450">
+
+<img src="./assets/45.png" width="450">
+
+* Créer et implémenter l'interface (service) `security/services/ISecurityService` :
+
+<img src="./assets/46.png" width="450">
+
+<img src="./assets/47.png" width="450">
+
+* Implémenter l'interface `UserDetailsService`, et défninir comment les 'utilisateurs sont chargés :
+
+<img src="./assets/48.png" width="500">
+
+* Dans la configuration de Spring Security, j'ai précisé l'utilisation de la stratégie user-details en passant l'objet de `UserDetailsService`, et j'ai mis à jour les droits d'accès tel que seules les ressources statiques (webjars & css & js & images) et les deux pages accueil & liste des étudiants, qui sont accessibles par le public :
+
+<img src="./assets/49.png" width="700">
+
+* Dans le programme principal, j'ai défini la fonction BEAN qui va fournir à l'application toujours un PasswordEncoder de type `BCryptPasswordEncoder` pour Hasher les mots de passe, et une deuxième fonction BEAN pour créer deux premiers utilisateurs avec deux roles `ADMIN` & `USER` : 
+
+<img src="./assets/50.png" width="700">
+
+
+* Au relancement de l'application, trois nouvelles tables sont crées, avec les données dedans :
+
+<img src="./assets/51.png" width="350">  |  <img src="./assets/52.png" width="350">  |  <img src="./assets/53.png" width="350">
+
+* J'ai revenu sur la configuration de sécurité pour mettre à jour les droits d'accès : 
+
+<img src="./assets/54.png" width="700">
+
+* Ensuite, j'ai créé la classe de configuration `security/MethodSecurityConfig` pour activer l'utilisation des annotation pour sécuriser l'accès aux routes [voir ce lien](https://www.baeldung.com/spring-security-method-security) :
+
+<img src="./assets/55.png" width="350">
+
+* Et enfin pour chaque route dans le controlleur `web/EtudiantsController` j'ai spécifié quel utilisateur peut y accéder avec l'annotation `@PreAuthorize()` : 
+
+<img src="./assets/56.png" width="400">
+
+* Ajouter le package `thymeleaf-extras-springsecurity5` pour avoir un contexte de sécurité dans les template :
+
+<img src="./assets/57.png" width="400">
+
+* j'ai fait les changements sur les templates qui sont adéquats à ces modifications de sécurité, voici la page de la liste des étudiants ( utilisateur authentifié : admin) : 
+
+<img src="./assets/58.png" width="700">
+
+* La page de la liste des étudiants ( utilisateur authentifié : user) :
+
+<img src="./assets/59.png" width="700">
+
 
 <br/>
 <br/>
 
-> ## Fin .
+> ## Fin 👾 .

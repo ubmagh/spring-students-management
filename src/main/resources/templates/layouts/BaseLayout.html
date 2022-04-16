@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,7 +42,23 @@
                         </div>
                     </li>
                 </ul>
-                <a class="btn btn-light action-button me-1" role="button" href="#"> <i class="fa-solid fa-arrow-right-to-bracket"></i> Login </a>
+                <a class="btn action-button me-1" role="button" th:href="@{/login}" sec:authorize="!isAuthenticated()"> <i class="fa-solid fa-arrow-right-to-bracket"></i> Login </a>
+                <ul class="nav navbar-nav me-1" sec:authorize="isAuthenticated()">
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle btn action-button" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                            <i class="fa-solid fa-user"></i>
+                            <span sec:authentication="name"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item text-white" th:href="@{/logout}"> <i class="fa-solid fa-arrow-right-from-bracket"></i> Se déconnecter</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item  text-white disabled" href="#" > 👋👋 Bienvenu <span sec:authentication="name"></span> !</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item  text-white disabled" href="#" sec:authorize="hasAuthority('ADMIN')" > ton role : <strong>admin</strong> !</a></li>
+                            <li><a class="dropdown-item text-white disabled" href="#" sec:authorize="!hasAuthority('ADMIN')" > ton role : <strong>user</strong> !</a></li>
+                        </ul>
+                    </div>
+                </ul>
                 <a class="btn btn-light action-button" role="button" href="https://github.com/ubmagh/spring-students-management" target="_blank"> <i class="fa-brands fa-github-square fa-lg"></i> </a>
             </div>
         </div>
