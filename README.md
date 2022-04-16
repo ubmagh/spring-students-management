@@ -169,6 +169,37 @@ Application JEE en spring pour gérer les étudiant.
 <img src="./assets/25.png" width="600">
 
 
+<br/>
+
+> ## 13- La page d'insértion d'un nouveau étudiant
+
+* Ajouter les annotations de validation à l'entité `Etudiant` : 
+
+<img src="./assets/26.png" width="400">
+
+* créer la fonction `add` sur le controlleur `web/EtudiantController` qui va retourner le formulaire pour créer le nouveau étudiant :
+
+<img src="./assets/27.png" width="400">
+
+* Créé le template (view) du formulaire sur le chemin `resource/pages/etudiants/create_form.html` : :
+
+<img src="./assets/28.png" width="400">
+
+* en accédant sur le chemin `localhost:8080/etudiants/new`, voici ce que s'affiche : 
+
+<img src="./assets/29.png" width="600">
+
+* Ensuite, j'ai créé la fonction (la route) pour traiter le formulaire envoyé : 
+
+<img src="./assets/30.png" width="350">
+
+* Après l'insertion (sans erreurs dans la validation), une redirection vers la liste des étudiants occure : 
+
+<img src="./assets/31.png" width="600">
+
+
+
+
 
 <br/>
 <br/>

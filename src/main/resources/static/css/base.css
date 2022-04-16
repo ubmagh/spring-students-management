@@ -100,7 +100,7 @@ body {
     background:#ebeff1;
 }
 
-.header-dark .navbar .action-button, .header-dark .navbar .action-button:active {
+.action-button,.action-button:active {
     background:#208f8f;
     border-radius:20px;
     font-size:inherit;

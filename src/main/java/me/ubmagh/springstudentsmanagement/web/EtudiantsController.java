@@ -8,9 +8,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import javax.validation.Valid;
 
 @Controller
 // url mapping is prefixed with /etudiants
@@ -22,10 +25,13 @@ public class EtudiantsController {
     @GetMapping("/etudiants")
     public String liste( Model model, @RequestParam(value = "page", defaultValue = "0") int page,
                          @RequestParam(value = "size", defaultValue = "10") int size,
-                         @RequestParam(value = "keyword", defaultValue = "") String keyword){
+                         @RequestParam(value = "keyword", defaultValue = "") String keyword,
+                         @RequestParam(value = "added", defaultValue = "false") String added
+    ){
         Page<Etudiant> etudiantsList = etudiantService.findByNomOrPrenom( keyword, PageRequest.of(page, size));
         model.addAttribute("etudiants", etudiantsList.getContent() );
         model.addAttribute("tab", "etudiants");
+        model.addAttribute("added", added);
 
         int[] pages ;
         if( etudiantsList.getTotalPages()>7 ) {
@@ -55,5 +61,23 @@ public class EtudiantsController {
         model.addAttribute("maxPages", etudiantsList.getTotalPages());
         return "pages/etudiants/list";
     }
+
+    @GetMapping("/etudiants/new")
+    public String add( Model model){
+        model.addAttribute("tab", "etudiants");
+        model.addAttribute("etudiant", new Etudiant() );
+        return "pages/etudiants/create_form";
+    }
+
+    @PostMapping("/etudiants/new")
+    public String save(Model model, @Valid Etudiant etudiant, BindingResult bindingResult){
+        model.addAttribute("tab", "etudiants");
+        model.addAttribute("etudiant", etudiant );
+        if(bindingResult.hasErrors())
+            return "pages/etudiants/create_form";
+        etudiantService.createEtudiant(etudiant);
+        return "redirect:/etudiants?added=true";
+    }
+
 
 }

@@ -28,6 +28,10 @@
             </form>
         </div>
     </div>
+    <div th:if="${added=='true'}" class="alert alert-success alert-dismissible fade show" role="alert">
+        L'étudiant a été ajouté avec <strong>succès!</strong> .
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <div class="mb-5 card bg-dark text-light">
         <div class="card-body">
             <table class="table table-dark table-hover text-center">
