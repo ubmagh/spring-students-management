@@ -173,6 +173,10 @@ Application JEE en spring pour gérer les étudiant.
 
 > ## 13- La page d'insértion d'un nouveau étudiant
 
+* intaller d'abord la dependance de validation
+
+<img src="./assets/32.png" width="400">
+
 * Ajouter les annotations de validation à l'entité `Etudiant` : 
 
 <img src="./assets/26.png" width="400">
@@ -196,6 +200,33 @@ Application JEE en spring pour gérer les étudiant.
 * Après l'insertion (sans erreurs dans la validation), une redirection vers la liste des étudiants occure : 
 
 <img src="./assets/31.png" width="600">
+
+
+<br/>
+
+> ## 14- Modifier les étudiants
+
+* créer la fonction `edit` sur le controlleur `web/EtudiantController` qui va retourner le formulaire pour modifier l'étudiant par son id :
+
+<img src="./assets/33.png" width="400">
+
+* Créé le template (view) du formulaire sur le chemin `resource/pages/etudiants/edit_form.html` : :
+
+<img src="./assets/34.png" width="400">
+
+* en accédant sur le chemin `localhost:8080/etudiants/562a2a46-59f3-4217-92af-d142098f226e`, voici ce que s'affiche :
+
+<img src="./assets/35.png" width="600">
+
+* mettre à jour la liste des étudiants avec un bouton de modification pour chaque ligne :
+
+<img src="./assets/36.png" width="600">
+
+
+* créer la fonction `put` sur le controlleur `web/EtudiantController` qui va retourner le formulaire traiter le formulaire et sauvegarder les changements :
+
+<img src="./assets/37.png" width="400">
+
 
 
 

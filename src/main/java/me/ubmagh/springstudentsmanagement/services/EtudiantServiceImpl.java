@@ -28,6 +28,16 @@ public class EtudiantServiceImpl implements IEtudiantService {
     }
 
     @Override
+    public Etudiant findById(String id) {
+        return etudiantRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void save(Etudiant etudiant) {
+        etudiantRepository.save(etudiant);
+    }
+
+    @Override
     public void deleteById(String id) {
         etudiantRepository.deleteById(id);
     }

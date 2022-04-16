@@ -5,7 +5,7 @@
       layout:decorate="layouts/BaseLayout">
 <head>
     <meta charset="UTF-8">
-    <title> GestEtud - Nouveau etudiant </title>
+    <title> GestEtud - Modifier etudiant </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="theme-color" content="#00000">
@@ -14,10 +14,14 @@
 <div layout:fragment="content">
     <div class="mt-3 mb-5 card bg-dark">
         <div class="card-header">
-            <h1 class="text-center h1 display-5 text-white"> Insérer un nouveau etudiant </h1>
+            <h1 class="text-center h1 display-5 text-white"> Modifier un nouveau etudiant </h1>
         </div>
-        <form method="post" th:action="@{/etudiants/new}">
+        <form method="post" th:action="@{/etudiants/put(page=${page}, size=${size}, keyword=${keyword})}">
             <div class="card-body text-white">
+
+                <div>
+                    <input type="hidden" name="id" th:value="${etudiant.getId()}">
+                </div>
 
                 <div class="col-8 mx-auto">
                     <div class="mb-3">
@@ -53,9 +57,9 @@
                     <div class="mb-3">
                         <label for="genre" class="form-label fw-bold">Sexe de l'étudiant : </label>
                         <select class="form-select" id="genre" name="genre">
-                            <option selected disabled> Choisir le genre...</option>
-                            <option value="MASCULIN" th:selected="${etudiant.getGenre()=='MASCULIN'}"> Masculin</option>
-                            <option value="FEMININ" th:selected="${etudiant.getGenre()=='FEMININ'}"> Féminin</option>
+                            <option disabled> Choisir le genre...</option>
+                            <option value="MASCULIN" th:selected="${etudiant.getGenre().ordinal()==0}"> Masculin</option>
+                            <option value="FEMININ" th:selected="${etudiant.getGenre().ordinal()==1}"> Féminin</option>
                         </select>
                         <small class="text-danger" th:errors="${etudiant.genre}"></small>
                     </div>
@@ -63,7 +67,7 @@
                     <div class="mb-3 text-center">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" name="enRegle" th:checked="${etudiant.isEnRegle()}"
-                                   id="enRegle" value="true">
+                                   id="enRegle" value="1">
                             <label class="form-check-label" for="enRegle">
                                 en règle
                             </label>
@@ -75,7 +79,7 @@
             </div>
             <div class="card-footer py-3">
                 <button class="btn btn-light action-button d-block mx-auto px-4 py-2" type="submit">
-                    <i class="fa-solid fa-circle-plus"></i> Insérer
+                    <i class="fa-solid fa-floppy-disk"></i> Enregistrer
                 </button>
             </div>
         </form>

@@ -30,19 +30,24 @@
     </div>
     <div th:if="${added=='true'}" class="alert alert-success alert-dismissible fade show" role="alert">
         L'étudiant a été ajouté avec <strong>succès!</strong> .
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <a class="btn-close" th:href="@{/etudiants(page=${currentPage}, size=${size}, keyword=${keyword})}" data-bs-dismiss="alert" aria-label="Close"></a>
+    </div>
+    <div th:if="${updated=='true'}" class="alert alert-success alert-dismissible fade show" role="alert">
+        L'étudiant a été modifié avec <strong>succès!</strong> .
+        <a class="btn-close" th:href="@{/etudiants(page=${currentPage}, size=${size}, keyword=${keyword})}" data-bs-dismiss="alert" aria-label="Close"></a>
     </div>
     <div class="mb-5 card bg-dark text-light">
         <div class="card-body">
-            <table class="table table-dark table-hover text-center">
+            <table class="table table-dark table-hover text-center align-middle">
                 <thead>
-                <th><strong> # </strong></th>
-                <th> Nom</th>
-                <th> Prenom</th>
-                <th> Email</th>
-                <th> Date de naissance</th>
-                <th> Genre</th>
-                <th> En règle</th>
+                    <th><strong> # </strong></th>
+                    <th> Nom</th>
+                    <th> Prenom</th>
+                    <th> Email</th>
+                    <th> Date de naissance</th>
+                    <th> Genre</th>
+                    <th> En règle</th>
+                    <th> <strong>Actions</strong> </th>
                 </thead>
                 <tbody th:with="count=${size}*${currentPage}+1">
                 <tr th:each="e, stat:${etudiants}">
@@ -58,6 +63,11 @@
                         <span style="color: deepskyblue;" th:if="${e.getGenre().ordinal()==0}"> Masculin </span>
                     </td>
                     <td th:text="${e.isEnRegle()?'✔':'❌'}"></td>
+                    <td>
+                        <a th:href="@{/etudiants/{id}(id=${e.getId()}, page=${currentPage}, size=${size}, keyword=${keyword} )}" class="btn btn-outline-success">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </a>
+                    </td>
                 </tr>
                 <tr th:if="${ #lists.isEmpty(etudiants)}">
                     <td colspan="6" class="bg-light">

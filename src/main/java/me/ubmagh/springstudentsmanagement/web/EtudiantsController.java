@@ -6,13 +6,13 @@ import me.ubmagh.springstudentsmanagement.services.EtudiantServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import javax.validation.Valid;
 
 @Controller
@@ -26,12 +26,14 @@ public class EtudiantsController {
     public String liste( Model model, @RequestParam(value = "page", defaultValue = "0") int page,
                          @RequestParam(value = "size", defaultValue = "10") int size,
                          @RequestParam(value = "keyword", defaultValue = "") String keyword,
-                         @RequestParam(value = "added", defaultValue = "false") String added
+                         @RequestParam(value = "added", defaultValue = "false") String added,
+                         @RequestParam(value = "updated", defaultValue = "false") String updated
     ){
         Page<Etudiant> etudiantsList = etudiantService.findByNomOrPrenom( keyword, PageRequest.of(page, size));
         model.addAttribute("etudiants", etudiantsList.getContent() );
         model.addAttribute("tab", "etudiants");
         model.addAttribute("added", added);
+        model.addAttribute("updated", updated);
 
         int[] pages ;
         if( etudiantsList.getTotalPages()>7 ) {
@@ -77,6 +79,39 @@ public class EtudiantsController {
             return "pages/etudiants/create_form";
         etudiantService.createEtudiant(etudiant);
         return "redirect:/etudiants?added=true";
+    }
+
+
+    @GetMapping("/etudiants/{id}")
+    public String edit(Model model, @PathVariable String id,
+                       @RequestParam(value = "page", defaultValue = "0") int page,
+                       @RequestParam(value = "size", defaultValue = "10") int size,
+                       @RequestParam(value = "keyword", defaultValue = "") String keyword){
+        model.addAttribute("tab", "etudiants");
+        Etudiant et = etudiantService.findById( id);
+        if ( et==null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Etudiant introuvable");
+        model.addAttribute("etudiant", et );
+        model.addAttribute("page", page );
+        model.addAttribute("size", size );
+        model.addAttribute("keyword", keyword );
+        return "pages/etudiants/edit_form";
+    }
+
+
+    @PostMapping("/etudiants/put")
+    public String put(Model model, @Valid Etudiant etudiant, BindingResult bindingResult,
+                      @RequestParam(value = "page", defaultValue = "0") int page,
+                      @RequestParam(value = "size", defaultValue = "10") int size,
+                      @RequestParam(value = "keyword", defaultValue = "") String keyword){
+        model.addAttribute("tab", "etudiants");
+        model.addAttribute("etudiant", etudiant );
+        model.addAttribute("page", page );
+        model.addAttribute("size", size );
+        model.addAttribute("keyword", keyword );
+        if(bindingResult.hasErrors())
+            return "pages/etudiants/edit_form";
+        etudiantService.save(etudiant);
+        return "redirect:/etudiants?updated=true&page="+page+"&size="+size+"&keyword="+keyword;
     }
 
 
