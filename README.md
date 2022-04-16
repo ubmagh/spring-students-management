@@ -315,6 +315,34 @@ Application JEE en spring pour gérer les étudiant.
 <img src="./assets/59.png" width="700">
 
 
+
+<br/>
+
+> ## 17- D'autres fonctionnalités :
+
+* Ajout d'une page personnalisée pour l'erreur HTTP:403 (forbidden), lors d'un accès non authorisé et une pour l'erreur HTTP:404 page introuvable. ces deux pages sont placées dans le chemin `templates/pages/errors/`:
+
+  * pour ça j'ai créé le controlleur qui permet de gérer les errerurs HTTP : 
+
+    <img src="./assets/60.png" width="700">
+
+  * et j'ai créé les templates nécessaires dans le chemin `resources/pages/errors` :
+    
+    <img src="./assets/61.png" width="400">
+  
+* Ajout d'une page personnalisée login :
+  * modifier la configuration de spring sécurité :
+    <img src="./assets/62.png" width="400">
+  * ensuite, j'ai créé le controlleur `security/SecurityController` pour retourner la page login pour toute requette GET vers le chemin 'GET' :
+    <img src="./assets/63.png" width="700">
+  * et enfin j'ai créé le template  `resources/pages/security/login.html`
+    <img src="./assets/64.png" width="400">
+  * Voici la page de login ;
+    <img src="./assets/65.png" width="700">
+
+
+
+<br/>
 <br/>
 <br/>
 
