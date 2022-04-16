@@ -346,4 +346,4 @@ Application JEE en spring pour gérer les étudiant.
 <br/>
 <br/>
 
-> ## Fin 👾 .
+> ## Fin 👾 . [ i'm a java hater ](https://youtu.be/m4-HM_sCvtQ)
