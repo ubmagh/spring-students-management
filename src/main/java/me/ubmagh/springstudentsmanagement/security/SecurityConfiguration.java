@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/").permitAll(); // permit home & students list
         http.authorizeRequests().antMatchers("/webjars/**", "/js/**", "/css/**", "/images/**").permitAll(); // permit static resources
 
-        http.exceptionHandling().accessDeniedPage("/pages/errors/403");
+        http.exceptionHandling().accessDeniedPage("/403");
     }
 
 }

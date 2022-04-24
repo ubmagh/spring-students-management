@@ -31,4 +31,10 @@ public class CustomErrorController implements ErrorController {
         }
         return "pages/errors/error";
     }
+
+    @RequestMapping("/403")
+    public String accessDenied() {
+        return "pages/errors/403";
+    }
+
 }
