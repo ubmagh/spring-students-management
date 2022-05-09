@@ -347,6 +347,16 @@ Application JEE en spring pour gérer les étudiant.
 <br/>
 <br/>
 
+
+
+## [Voir l'implementation d'un deuxième frontend SPA avec angular](https://github.com/ubmagh/spring-students-management/tree/angular-2nd-frontend)
+
+> branche : [angular-2nd-frontend](https://github.com/ubmagh/spring-students-management/tree/angular-2nd-frontend)
+
+
+<br/>
+
+
 > ## Fin 👾 . 
 
 [ Bonus ](https://youtu.be/m4-HM_sCvtQ)
